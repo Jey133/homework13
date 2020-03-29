@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>homework13</title>
+	<style>
+		.title{
+			margin: 30px 0;
+		}
+
+		.tab {
+  overflow: hidden;
+  border: 1px solid #ccc;
+  background-color: #f1f1f1;
+}
+
+.tab button {
+  background-color: inherit;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  transition: 0.3s;
+}
+
+.tab button:hover {
+  background-color: #ddd;
+}
+
+.tab button.active {
+  background-color: #ccc;
+}
+
+.tabcontent {
+  display: none;
+  padding: 6px 12px;
+  border: 1px solid #ccc;
+  border-top: none;
+}
+	</style>
+</head>
+<body>
+
+<div class="tab">
+  <button id="#tab1"  class="tablinks" value="London" onclick="openCity(event, 'London')">London</button>
+  <button id="#tab2" class="tablinks" value="Paris" onclick="openCity(event, 'Paris')">Paris</button>
+  <button id="#tab3" class="tablinks" value="Tokyo" onclick="openCity(event, 'Tokyo')">Tokyo</button>
+</div>
+
+<div id="London" class="tabcontent">
+  <h3>London</h3>
+  <p>London is the capital city of England.</p>
+</div>
+
+<div id="Paris" class="tabcontent">
+  <h3>Paris</h3>
+  <p>Paris is the capital of France.</p>
+</div>
+
+<div id="Tokyo" class="tabcontent">
+  <h3>Tokyo</h3>
+  <p>Tokyo is the capital of Japan.</p>
+</div>
+
+<div class="tooltip" data-tooltip="Текст для всплывающей подсказки.">
+  Наведи курсор на меня ;)
+</div>
+
+<div class="container">
+	<div class="box">
+		<div class="title">Title1</div>
+		<div class="content">
+			Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellat minus, dolorum facilis, neque non nemo eligendi, voluptatibus ullam adipisci, laudantium illo omnis modi magnam! Similique ipsa exercitationem necessitatibus ducimus cum?
+		</div>
+	</div>
+	<div class="box">
+		<div class="title">Title2</div>
+		<div class="content">
+			Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorem, asperiores ipsam nemo placeat eum dolore similique blanditiis consectetur quibusdam, tempore, sapiente quisquam facere deserunt doloribus quidem, earum voluptatem possimus pariatur.
+		</div>
+	</div>
+	<div class="box">
+		<div class="title">Title3</div>
+		<div class="content">
+			Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo voluptate dolore, consequuntur deserunt, atque beatae, nam aliquam ipsa natus perferendis omnis officia minus vero repellendus, neque ratione culpa unde corporis?
+		</div>
+	</div>
+</div>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+<script>
+
+function openCity(evt, cityName) {
+  var i, tabcontent, tablinks;
+  var elementId = evt.target.id;
+  document.location.hash = '#' + elementId;
+
+  tabcontent = document.getElementsByClassName("tabcontent");
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+  }
+
+  tablinks = document.getElementsByClassName("tablinks");
+  for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].className = tablinks[i].className.replace(" active", "");
+  }
+
+  document.getElementById(cityName).style.display = "block";
+  evt.currentTarget.className += " active";
+}
+
+function openCityOnLoad () { 
+	var elementId = document.location.hash;
+	var tablinks;
+	if(elementId !== ""){
+		var cityName = document.getElementById(elementId).value;
+		tablinks = document.getElementsByClassName("tablinks");
+  		for (i = 0; i < tablinks.length; i++) {
+    		tablinks[i].className = tablinks[i].className.replace(" active", "");
+		}
+		document.getElementById(cityName).style.display = "block";
+  		document.getElementById(elementId).className += " active";
+	}  
+}
+
+$( document ).ready(function() {
+    openCityOnLoad();
+});
+
+	
+$('.tooltip').mouseover(function(){
+	let newSpan = $('<span class="tooltip-content">Текст для всплывающей подсказки.</span>');
+		$(this).append(newSpan);
+});
+$('.tooltip').mouseout(function(){
+	$('.tooltip-content').remove();
+});
+
+
+$('.content').hide(); 
+$('.title').click(function(){
+$(this).next().toggle();
+});
+
+</script>
+	
+</body>
+</html>
